@@ -18,7 +18,7 @@ app = FastAPI(title="QR Code Generator API", description="Gerador de QR Codes co
 current_dir = os.path.dirname(os.path.abspath(__file__))
 frontend_dir = os.path.join(os.path.dirname(current_dir), "frontend")
 
-if os.environ.get("RENDER"):
+if os.path.exists(frontend_dir):
     app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
 
 app.add_middleware(
