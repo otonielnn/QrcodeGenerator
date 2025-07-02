@@ -45,7 +45,7 @@ preview = true
 quote-style = 'single'
 
 [tool.taskipy.tasks]
-run = 'fastapi dev main.py'
+run = 'python3 main.py'
 
 pre_test = 'task lint'
 test = 'pytest --cov=. --cov-report=term-missing --cov-report=html -vv'
