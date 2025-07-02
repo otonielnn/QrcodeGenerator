@@ -15,12 +15,6 @@ except ImportError:
 
 app = FastAPI(title="QR Code Generator API", description="Gerador de QR Codes com suporte a logos personalizadas")
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-frontend_dir = os.path.join(os.path.dirname(current_dir), "frontend")
-
-if os.path.exists(frontend_dir):
-    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -75,6 +69,14 @@ def gerar_qrcode_endpoint(
         media_type="image/png",
         headers={"Content-Disposition": f"attachment; filename={filename or 'qrcode.png'}"}
     )
+
+
+# Montar arquivos estáticos APÓS definir as rotas da API
+current_dir = os.path.dirname(os.path.abspath(__file__))
+frontend_dir = os.path.join(os.path.dirname(current_dir), "frontend")
+
+if os.path.exists(frontend_dir):
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
 
 
 if __name__ == "__main__":
