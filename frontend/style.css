@@ -1,98 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: #3776AB;
+    background: linear-gradient(135deg, #3776AB 0%, #2E5A96 100%);
+    min-height: 100vh;
+    font-family: 'Inter', 'Fira Code', monospace, sans-serif;
 }
 
 header {
-    background-color: #FFCC33;
+    background: linear-gradient(135deg, #FFCC33 0%, #FFD700 100%);
     padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 header h1 {
     color: #3776AB;
     text-align: center;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Fira Code', monospace;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+header h1::after {
+    margin-left: 10px;
+    font-size: 0.7em;
+    color: #2E5A96;
 }
 
 .form-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    height: 60vh;
+    padding: 20px 20px 30px 20px;
+    gap: 20px;
 }
 
 #url {
-    width: 400px;
-    padding: 12px 20px;
+    width: 100%;
+    max-width: 400px;
+    padding: 15px 25px;
     border: 2px solid #FFCC33;
-    border-radius: 25px;
-    font-size: 18px;
+    border-radius: 30px;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
     outline: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.95);
+    letter-spacing: 1px;
+}
+
+#url:focus {
+    border-color: #FFD700;
+    box-shadow: 0 6px 20px rgba(255, 204, 51, 0.3);
+    transform: translateY(-2px);
 }
 
 label {
-    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
     color: #FFCC33;
-    margin-right: 10px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-#logo {
-    width: 100px;
-    padding: 12px 20px;
-    border: 2px solid #FFCC33;
-    background-color: #3776AB;
-}
-
+/* Input de arquivo estilizado */
 .file-input {
     display: none;
 }
 
 .file-label {
     display: block;
-    width: 400px;
-    padding: 12px 20px;
+    width: 100%;
+    max-width: 400px;
+    padding: 15px 25px;
     border: 2px solid #FFCC33;
-    border-radius: 25px;
-    font-size: 18px;
-    background-color: #3776AB;
+    border-radius: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    background: linear-gradient(135deg, #3776AB 0%, #2E5A96 100%);
     color: #FFCC33;
     text-align: center;
     cursor: pointer;
-    margin-top: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .file-label:hover {
-    background-color: #FFCC33;
+    background: linear-gradient(135deg, #FFCC33 0%, #FFD700 100%);
     color: #3776AB;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 204, 51, 0.3);
 }
 
 button[type="submit"] {
     display: block;
-    width: 400px;
-    padding: 12px 20px;
-    border: 2px solid #3776AB;
-    border-radius: 25px;
-    font-size: 18px;
-    background-color: #FFCC33;
+    width: 100%;
+    max-width: 400px;
+    padding: 15px 25px;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    font-family: 'Fira Code', monospace;
+    font-size: 16px;
+    background: linear-gradient(135deg, #FFCC33 0%, #FFD700 100%);
     color: #3776AB;
     text-align: center;
     cursor: pointer;
-    margin-top: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 button[type="submit"]:hover {
-    background-color: #3776AB;
+    background: linear-gradient(135deg, #3776AB 0%, #2E5A96 100%);
     color: #FFCC33;
     border-color: #FFCC33;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+button[type="submit"]:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#loading {
+    text-align: center;
+    margin: 10px auto 15px auto;
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(255, 204, 51, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+    border: 2px solid #FFCC33;
+    border-radius: 20px;
+    color: #FFCC33;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.qrcode-container {
+    margin: 15px auto 30px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    border: 2px solid #FFCC33;
+}
+
+.qrcode-container h3 {
+    color: #3776AB;
+    margin-bottom: 20px;
+    font-family: 'Fira Code', monospace;
+    font-size: 20px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+.qrcode-container h3::before {
+    content: '< ';
+    color: #FFCC33;
+}
+
+.qrcode-container h3::after {
+    content: ' />';
+    color: #FFCC33;
+}
+
+.qrcode-display {
+    margin: 20px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    border: 2px solid #FFCC33;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#qrcode-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#download-btn {
+    background: linear-gradient(135deg, #FFCC33 0%, #FFD700 100%);
+    color: #3776AB;
+    border: 2px solid transparent;
+    padding: 15px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#download-btn::before {
+    margin-right: 5px;
+}
+
+#download-btn:hover {
+    background: linear-gradient(135deg, #3776AB 0%, #2E5A96 100%);
+    color: #FFCC33;
+    border-color: #FFCC33;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media screen and (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .form-container {
+        padding: 20px 15px 30px 15px;
+    }
+    
+    #url, .file-label, button[type="submit"] {
+        max-width: 350px;
+        font-size: 15px;
+    }
+    
+    .qrcode-container {
+        max-width: 350px;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        padding: 15px 10px;
+    }
+    
+    header h1 {
+        font-size: 1.7rem;
+    }
+    
+    .form-container {
+        padding: 15px 10px 20px 10px;
+        gap: 15px;
+    }
+    
+    #url, .file-label, button[type="submit"] {
+        max-width: 300px;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .qrcode-container {
+        max-width: 300px;
+        padding: 15px;
+        margin: 10px auto 20px auto;
+    }
+    
+    .qrcode-container h3 {
+        font-size: 18px;
+    }
+    
+    #download-btn {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    #url, .file-label, button[type="submit"] {
+        max-width: 280px;
+        padding: 10px 15px;
+    }
+    
+    .qrcode-container {
+        max-width: 280px;
+        padding: 12px;
+    }
+    
+    .form-container {
+        gap: 12px;
+    }
 }
