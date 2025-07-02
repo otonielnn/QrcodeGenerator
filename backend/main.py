@@ -1,17 +1,25 @@
 import io
+import os
 from typing import Optional
 
 import uvicorn
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
 
 try:
     from backend.qrcode_utils import gerar_qrcode
 except ImportError:
     from qrcode_utils import gerar_qrcode
 
-app = FastAPI()
+app = FastAPI(title="QR Code Generator API", description="Gerador de QR Codes com suporte a logos personalizadas")
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+frontend_dir = os.path.join(os.path.dirname(current_dir), "frontend")
+
+if os.environ.get("RENDER"):
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
 
 app.add_middleware(
     CORSMiddleware,
@@ -102,7 +110,6 @@ if __name__ == "__main__":
 
     import os
     
-    # Usar a porta do ambiente (Render) ou 8000 como fallback
     port = int(os.environ.get("PORT", 8000))
     
     uvicorn.run(

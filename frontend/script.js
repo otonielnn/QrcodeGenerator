@@ -1,8 +1,12 @@
 function getApiUrl() {
     const hostname = window.location.hostname;
-
+    const protocol = window.location.protocol;
+    
     if (hostname !== 'localhost' && hostname !== '127.0.0.1' && hostname !== '') {
-        return `http://${hostname}:8000/gerar-qrcode`;
+        if (window.location.port === '' || window.location.port === '80' || window.location.port === '443') {
+            return `${protocol}//${hostname}/gerar-qrcode`;
+        }
+        return `${protocol}//${hostname}:8000/gerar-qrcode`;
     } else {
         return 'http://localhost:8000/gerar-qrcode';
     }
@@ -33,7 +37,7 @@ document.getElementById('gerar-btn').addEventListener('click', async function ()
 
         const response = await fetch(API_URL, {
             method: 'POST',
-            body: formData  // Não definir Content-Type - deixar o browser definir
+            body: formData
         });
 
         if (!response.ok) {
@@ -43,7 +47,6 @@ document.getElementById('gerar-btn').addEventListener('click', async function ()
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
 
-        // Exibir o QR Code
         exibirQRCode(imageUrl);
 
     } catch (error) {

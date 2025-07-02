@@ -1,6 +1,3 @@
-"""
-Testes para os endpoints da API FastAPI
-"""
 import io
 
 import pytest
@@ -8,10 +5,8 @@ from PIL import Image
 
 
 class TestQRCodeEndpoint:
-    """Testes para o endpoint /gerar-qrcode"""
 
     def test_gerar_qrcode_simples(self, client):
-        """Teste básico: gerar QR code apenas com URL"""
         response = client.post(
             "/gerar-qrcode",
             data={"url": "https://google.com"}
@@ -21,14 +16,12 @@ class TestQRCodeEndpoint:
         assert response.headers["content-type"] == "image/png"
         assert "qrcode.png" in response.headers.get("content-disposition", "")
 
-        # Verificar se é uma imagem PNG válida
         img = Image.open(io.BytesIO(response.content))
         assert img.format == "PNG"
         assert img.size[0] > 0
         assert img.size[1] > 0
 
     def test_gerar_qrcode_com_filename_customizado(self, client):
-        """Teste: gerar QR code com nome de arquivo personalizado"""
         filename = "meu_qrcode_teste.png"
         response = client.post(
             "/gerar-qrcode",
@@ -42,7 +35,6 @@ class TestQRCodeEndpoint:
         assert filename in response.headers.get("content-disposition", "")
 
     def test_gerar_qrcode_com_logo(self, client, sample_logo_file):
-        """Teste: gerar QR code com logo"""
         with open(sample_logo_file, "rb") as logo_file:
             response = client.post(
                 "/gerar-qrcode",
