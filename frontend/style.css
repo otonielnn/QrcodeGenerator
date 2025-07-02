@@ -247,6 +247,73 @@ button[type="submit"]:active {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Estilos para o preview da imagem */
+#logo-preview {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #FFCC33;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.logo-preview-hidden {
+    display: none !important;
+}
+
+#logo-preview:hover {
+    box-shadow: 0 6px 20px rgba(255, 204, 51, 0.3);
+    transform: translateY(-2px);
+}
+
+#file-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #3776AB;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
+}
+
+#preview-image {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+    border: 2px solid #FFCC33;
+}
+
+#remove-logo {
+    background: linear-gradient(135deg, #ff4444 0%, #cc3333 100%);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(255, 68, 68, 0.3);
+}
+
+#remove-logo:hover {
+    background: linear-gradient(135deg, #ff6666 0%, #ee4444 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+}
+
+#remove-logo:active {
+    transform: translateY(0);
+}
+
 @media screen and (max-width: 768px) {
     header h1 {
         font-size: 2rem;

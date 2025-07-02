@@ -14,6 +14,38 @@ function getApiUrl() {
 
 const API_URL = getApiUrl();
 
+// Event listener para preview da imagem
+document.getElementById('logo').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const previewContainer = document.getElementById('logo-preview');
+    const previewImage = document.getElementById('preview-image');
+    const fileName = document.getElementById('file-name');
+    
+    if (file) {
+        // Verificar se é uma imagem
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                fileName.textContent = `Arquivo: ${file.name}`;
+                previewContainer.classList.remove('logo-preview-hidden');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Por favor, selecione apenas arquivos de imagem!');
+            event.target.value = '';
+        }
+    } else {
+        previewContainer.classList.add('logo-preview-hidden');
+    }
+});
+
+// Event listener para remover logo
+document.getElementById('remove-logo').addEventListener('click', function() {
+    document.getElementById('logo').value = '';
+    document.getElementById('logo-preview').classList.add('logo-preview-hidden');
+});
+
 document.getElementById('gerar-btn').addEventListener('click', async function () {
     const urlInput = document.getElementById('url').value;
     const logoFile = document.getElementById('logo').files[0];

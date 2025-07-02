@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-    <title>QR Code Generator</title>
+    <title>Qrcode</title>
 </head>
 
 <body>
@@ -17,7 +16,15 @@
         <div class="form-container">
             <input type="text" id="url" placeholder="Digite a URL">
             <label for="logo" class="file-label">Escolher logo</label>
-            <input type="file" name="logo" id="logo" class="file-input">
+            <input type="file" name="logo" id="logo" class="file-input" accept="image/*">
+            
+            <!-- Preview da imagem -->
+            <div id="logo-preview" class="logo-preview-hidden">
+                <p id="file-name"></p>
+                <img id="preview-image" src="" alt="Preview do logo">
+                <button type="button" id="remove-logo">Remover</button>
+            </div>
+            
             <button type="submit" id="gerar-btn">Gerar Qrcode</button>
         </div>
 
