@@ -2,17 +2,22 @@ function getApiUrl() {
     const hostname = window.location.hostname;
     const protocol = window.location.protocol;
     
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1' && hostname !== '') {
-        if (window.location.port === '' || window.location.port === '80' || window.location.port === '443') {
-            return `${protocol}//${hostname}/gerar-qrcode`;
-        }
-        return `${protocol}//${hostname}:8000/gerar-qrcode`;
-    } else {
+    // Se estiver em desenvolvimento local
+    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '') {
         return 'http://localhost:8000/gerar-qrcode';
     }
+    
+    // Se estiver em produção (Render ou qualquer outro host)
+    // A API está no mesmo domínio, apenas usa o path
+    return `${protocol}//${hostname}/gerar-qrcode`;
 }
 
 const API_URL = getApiUrl();
+
+// Log para debug
+console.log('API URL configurada:', API_URL);
+console.log('Hostname atual:', window.location.hostname);
+console.log('Protocol atual:', window.location.protocol);
 
 // Event listener para preview da imagem
 document.getElementById('logo').addEventListener('change', function(event) {
@@ -83,7 +88,21 @@ document.getElementById('gerar-btn').addEventListener('click', async function ()
 
     } catch (error) {
         console.error('Erro ao gerar QR Code:', error);
-        alert('Erro ao gerar QR Code. Verifique se a API está rodando na porta 8000.');
+        console.error('API URL:', API_URL);
+        
+        let errorMessage = 'Erro ao gerar QR Code.';
+        
+        if (error.message.includes('Failed to fetch')) {
+            errorMessage = 'Erro de conexão com a API. Verifique sua conexão com a internet.';
+        } else if (error.message.includes('404')) {
+            errorMessage = 'Endpoint da API não encontrado. Verifique se a API está configurada corretamente.';
+        } else if (error.message.includes('405')) {
+            errorMessage = 'Método não permitido. Problema na configuração da API.';
+        } else if (error.message.includes('500')) {
+            errorMessage = 'Erro interno do servidor. Tente novamente em alguns minutos.';
+        }
+        
+        alert(`${errorMessage}\n\nDetalhes técnicos: ${error.message}\nAPI URL: ${API_URL}`);
     } finally {
         esconderLoading();
     }
